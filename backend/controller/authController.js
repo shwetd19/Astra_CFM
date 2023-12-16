@@ -148,7 +148,9 @@ exports.getUserCases = async (req, res, next) => {
   
       console.log('User Cases:', user.cases);
   
-      // Log the objects within each case
+      // Log the objects within each case  
+
+      // this is updated
       user.cases.forEach((caseItem) => {
         console.log(`Case ${caseItem._id}:`, caseItem);
       });
