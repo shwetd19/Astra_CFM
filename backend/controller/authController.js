@@ -75,6 +75,7 @@ exports.logout = (req, res, next) => {
 }
 
 
+let username = ""
 // user profile
 exports.userProfile = async (req, res, next) => {
 

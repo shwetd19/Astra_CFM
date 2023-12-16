@@ -129,6 +129,8 @@ route.get("/getUserCases", isAuthenticated, authController.getUserCases);
  * @description get all users
  * @method GET /allusers
  */
-route.get("/usertype", authController.usertype);
+route.get("/usertype", isAuthenticated, authController.usertype);
+
+
 
 module.exports = route;
