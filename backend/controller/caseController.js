@@ -3,23 +3,30 @@ const Case = require('../models/caseModel.js');
 
 exports.addCase = async (req, res) => {
     try {
-        const { courtID, ...restOfData } = req.body;
-
-        // Create a new collection based on courtID
-        const caseModel = mongoose.model(`Case_${courtID}`, Case.schema);
-
-        // Create a new document using the specific model
-        const newCase = new caseModel({ courtID, ...restOfData });
-
-        // Save the document to the database
-        await newCase.save();
-
-        res.status(201).json({ message: 'Case added successfully', case: newCase });
+      const { courtID, ...restOfData } = req.body;
+  
+      // Assuming req.user contains the user information
+      const userID = req.user._id;
+  
+      // Create a new collection based on courtID
+      const caseModel = mongoose.model(`Case_${courtID}`, Case.schema);
+  
+      // Create a new document using the specific model
+      const newCase = new caseModel({ courtID, userID, ...restOfData });
+  
+      // Save the document to the specific courtID table
+      await newCase.save();
+  
+      // Save the document to the mastercases table
+      const masterCase = new MasterCase({ courtID, userID, ...restOfData });
+      await masterCase.save();
+  
+      res.status(201).json({ message: "Case added successfully", case: newCase });
     } catch (err) {
-        console.log(err.message);
-        res.status(500).json({ error: err.message });
+      console.log(err.message);
+      res.status(500).json({ error: err.message });
     }
-};
+  };
 
 exports.getAllCases = async (req, res) => {
     try {

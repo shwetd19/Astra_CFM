@@ -4,6 +4,12 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
+    cases: [{ type: mongoose.Schema.Types.ObjectId, ref: "Case" }],
+    type: {
+      type: String,
+      enum: ["Lawyer", "Litigant", "Judge", "Admin", "courtAdmin"],
+      required: true,
+    },
     type: {
       type: String,
       enum: ["Lawyer", "Litigant", "Judge", "Admin", "courtAdmin"],

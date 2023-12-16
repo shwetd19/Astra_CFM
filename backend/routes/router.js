@@ -119,4 +119,16 @@ route.get("/user/:id", isAuthenticated, userController.singleUser);
  */
 route.put("/user/edit/:id", isAuthenticated, userController.editUser);
 
+/**
+ * @description get user cases with details
+ * @method GET /userCasesDetails
+ */
+route.get("/getUserCases", isAuthenticated, authController.getUserCases);
+
+/**
+ * @description get all users
+ * @method GET /allusers
+ */
+route.get("/usertype", isAuthenticated, authController.usertype);
+
 module.exports = route;

@@ -3,17 +3,30 @@ const { ObjectId } = mongoose.Schema;
 
 const caseSchema = new mongoose.Schema(
   {
+    objects: [{ type: mongoose.Schema.Types.ObjectId, ref: "ObjectModel" }],
+
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    userID: {
+      type: ObjectId,
+      ref: "User", // Assuming "User" is the model for the user collection
+      required: true,
+    },
     courtType: {
-        type: String,
-        enum: ["District Court", "High Court", "Supreme Court", "Magistrate Court"],
-        required: true,
-      },
-      courtID: {
-        type: String,
-        enum: ["DC001", "HC001", "SC001", "MC001"],
-        required: true,
-        // unique: true, 
-      },
+      type: String,
+      enum: [
+        "District Court",
+        "High Court",
+        "Supreme Court",
+        "Magistrate Court",
+      ],
+      required: true,
+    },
+    courtID: {
+      type: String,
+      enum: ["DC001", "HC001", "SC001", "MC001"],
+      required: true,
+      // unique: true,
+    },
     district: {
       type: String,
       trim: true,
