@@ -1,4 +1,5 @@
 
+const { isLawyer } = require('../middleware/auth.js');
 const User = require('../models/user.js');
 const ErrorResponse = require('../utils/errorResponse');
 
@@ -74,7 +75,6 @@ exports.logout = (req, res, next) => {
 }
 
 
-let username = ""
 // user profile
 exports.userProfile = async (req, res, next) => {
 
@@ -92,8 +92,7 @@ exports.usertype = async (req, res, next) => {
     try {
         // Assuming username is a global variable or defined in the same module
         res.status(200).json({
-            success: true,
-            userType: username // Use the username variable to get the user type
+            userType: "Lawyer" // Use the username variable to get the user type
         });
     } catch (error) {
         // Handle any errors
