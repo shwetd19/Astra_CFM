@@ -21,6 +21,13 @@ const caseSchema = new mongoose.Schema(
       ],
       required: true,
     },
+    caseSeverity: {
+      type: Number,
+    },
+    isScheduled: {
+      type: Boolean,
+      default: false
+    },
     courtID: {
       type: String,
       enum: ["DC001", "HC001", "SC001", "MC001"],
