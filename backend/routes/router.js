@@ -5,7 +5,12 @@ const authController = require("../controller/authController");
 const userController = require("../controller/userController");
 
 const render = require("../services/render");
-const { isAuthenticated, isJudge, isLawyer , isAdmin } = require("../middleware/auth");
+const {
+  isAuthenticated,
+  isJudge,
+  isLawyer,
+  isAdmin,
+} = require("../middleware/auth");
 
 // To take input from frontend
 // route.post("/submitForm", isAuthenticated, (req, res) => {
@@ -25,8 +30,6 @@ const { isAuthenticated, isJudge, isLawyer , isAdmin } = require("../middleware/
 //     }
 // });
 
-
-
 /**
  *  @description Root Route
  *  @method GET /
@@ -37,14 +40,23 @@ route.get("/", render.homeRoutes);
  * @description get cases by court type
  * @method GET /getCasesByCourtType/:courtType
  */
-route.get('/getCasesByCourtType/:courtType', isAuthenticated, isJudge, caseController.getCasesByCourtType);
+route.get(
+  "/getCasesByCourtType/:courtType",
+  isAuthenticated,
+  caseController.getCasesByCourtType
+);
 
 /**
  * @description update case
  * @method PUT /updateCase
  */
 try {
-  route.put("/updateCase/:id", isLawyer, caseController.updateCase);
+  route.put(
+    "/updateCase/:id",
+    isAuthenticated,
+    isLawyer,
+    caseController.updateCase
+  );
 } catch (err) {
   console.log(err);
 }
@@ -69,7 +81,12 @@ route.post("/addCase", isAuthenticated, isLawyer, caseController.addCase);
  * @description delete case
  * @method DELETE /deleteCase
  */
-route.delete("/deleteCase/:caseId", isAuthenticated, isLawyer, caseController.deleteCase);
+route.delete(
+  "/deleteCase/:caseId",
+  isAuthenticated,
+  isLawyer,
+  caseController.deleteCase
+);
 
 //! Authentication Routes
 
@@ -96,7 +113,6 @@ route.get("/logout", isAuthenticated, authController.logout);
  * @description user profile
  * @method  /me
  */
-
 route.get("/me", isAuthenticated, authController.userProfile);
 
 //! User Routes
@@ -105,7 +121,7 @@ route.get("/me", isAuthenticated, authController.userProfile);
  * @description get all users
  * @method GET /allusers
  */
-route.get("/allusers", isAuthenticated, isAdmin ,userController.allUsers);
+route.get("/allusers", isAuthenticated, isAdmin, userController.allUsers);
 
 /**
  * @description get Single users
@@ -119,18 +135,22 @@ route.get("/user/:id", isAuthenticated, userController.singleUser);
  */
 route.put("/user/edit/:id", isAuthenticated, userController.editUser);
 
+// /**
+//  * @description get user cases with details
+//  * @method GET /userCasesDetails
+//  */
+// route.get("/getUserCases", isAuthenticated, authController.getUserCases);
+
 /**
  * @description get user cases with details
  * @method GET /userCasesDetails
  */
-route.get("/getUserCases", isAuthenticated, authController.getUserCases);
+route.get("/getUserCasesDetails", isAuthenticated, caseController.getUserCasesDetails);
 
 /**
  * @description get all users
  * @method GET /allusers
  */
 route.get("/usertype", isAuthenticated, authController.usertype);
-
-
 
 module.exports = route;

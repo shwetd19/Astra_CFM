@@ -1,168 +1,120 @@
-
-const { isLawyer } = require('../middleware/auth.js');
-const User = require('../models/user.js');
-const ErrorResponse = require('../utils/errorResponse');
-
+const { isLawyer } = require("../middleware/auth.js");
+const User = require("../models/user.js");
+const ErrorResponse = require("../utils/errorResponse");
 
 exports.signup = async (req, res, next) => {
-    const { email } = req.body;
-    const userExist = await User.findOne({ email });
-    if (userExist) {
-        return next(new ErrorResponse("E-mail already registred", 400));
-    }
-    try {
-        const user = await User.create(req.body);
-        res.status(201).json({
-            success: true,
-            user
-        })
-    } catch (error) {
-        next(error);
-    }
-}
-
+  const { email } = req.body;
+  const userExist = await User.findOne({ email });
+  if (userExist) {
+    return next(new ErrorResponse("E-mail already registred", 400));
+  }
+  try {
+    const user = await User.create(req.body);
+    res.status(201).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 exports.signin = async (req, res, next) => {
-
-    try {
-        const { email, password } = req.body;
-        //validation
-        if (!email) {
-            return next(new ErrorResponse("please add an email", 403));
-        }
-        if (!password) {
-            return next(new ErrorResponse("please add a password", 403));
-        }
-
-        //check user email
-        const user = await User.findOne({ email });
-        if (!user) {
-            return next(new ErrorResponse("invalid credentials", 400));
-        }
-        //check password
-        const isMatched = await user.comparePassword(password);
-        if (!isMatched) {
-            return next(new ErrorResponse("invalid credentials", 400));
-        }
-
-        sendTokenResponse(user, 200, res);
-
-    } catch (error) {
-        next(error);
+  try {
+    const { email, password } = req.body;
+    //validation
+    if (!email) {
+      return next(new ErrorResponse("please add an email", 403));
     }
-}
+    if (!password) {
+      return next(new ErrorResponse("please add a password", 403));
+    }
+
+    //check user email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next(new ErrorResponse("invalid credentials", 400));
+    }
+    //check password
+    const isMatched = await user.comparePassword(password);
+    if (!isMatched) {
+      return next(new ErrorResponse("invalid credentials", 400));
+    }
+
+    sendTokenResponse(user, 200, res);
+  } catch (error) {
+    next(error);
+  }
+};
 
 const sendTokenResponse = async (user, codeStatus, res) => {
-    const token = await user.getJwtToken();
-    res
-        .status(codeStatus)
-        .cookie('token', token, { maxAge: 60 * 60 * 1000, httpOnly: true })
-        .json({
-            success: true,
-            role: user.role
-        })
-}
-
+  const token = await user.getJwtToken();
+  res
+    .status(codeStatus)
+    .cookie("token", token, { maxAge: 60 * 60 * 1000, httpOnly: true })
+    .json({
+      success: true,
+      role: user.role,
+    });
+};
 
 // log out
 exports.logout = (req, res, next) => {
-
-    res.clearCookie('token');
-    res.status(200).json({
-        success: true,
-        message: "logged out"
-    })
-}
-
-
-let username = ""
-// user profile
-exports.userProfile = async (req, res, next) => {
-
-    const user = await User.findById(req.user.id).select('-password');
-    username = user.type;
-// console.log(username)
-
-    res.status(200).json({
-        success: true,
-        user
-    })
-}
-
-exports.usertype = async (req, res, next) => {
-    try {
-        // Assuming username is a global variable or defined in the same module
-        res.status(200).json({
-            userType: "Lawyer" // Use the username variable to get the user type
-        });
-    } catch (error) {
-        // Handle any errors
-        console.error(error);
-        res.status(500).json({
-            success: false,
-            message: 'Internal Server Error'
-        });
-    }
+  res.clearCookie("token");
+  res.status(200).json({
+    success: true,
+    message: "logged out",
+  });
 };
 
-exports.getUserCases = async (req, res, next) => {
-    try {
-    //   const user = await User.findById(req.user.id).populate('cases', 'objectId'); // Adjust 'cases' and 'objectId' based on your model definitions
-  const user = await User.findById(req.user.id).populate('cases');
+let username = "";
+// user profile
+exports.userProfile = async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("-password");
+  username = user.type;
+  res.status(200).json({
+    success: true,
+    user,
+  });
+};
 
-      if (!user) {
-        return res.status(404).json({
-          success: false,
-          message: 'User not found',
-        });
-      }
-  
-      const caseObjectIds = user.cases.map(caseItem => caseItem.objectId); // Adjust 'objectId' based on your Case model fields
-  
-      res.status(200).json({
-        success: true,
-        caseObjectIds,
-      });
-      
-    } catch (error) {
-      next(error);
-    } 
+exports.usertype = async (req, res, next) => {
+  try {
+    res.status(200).json({
+      userType: username, // Use the username variable to get the user type
+    });
+  } catch (error) {
+    // Handle any errors
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
 
-  };
-  
-  exports.getUserCasesDetails = async (req, res, next) => {
-    try {
-      const user = await User.findById(req.user.id).populate({
-        path: 'cases',
-        populate: {
-          path: 'objects', // Modify 'objects' based on your Case model fields
-        },
-      });
-  
-      if (!user) {
-        return res.status(404).json({
-          success: false,
-          message: 'User not found',
-        });
-      }
-  
-      console.log('User Cases:', user.cases);
-  
-      // Log the objects within each case  
+// exports.getUserCases = async (req, res, next) => {
+//     try {
+//     //   const user = await User.findById(req.user.id).populate('cases', 'objectId'); // Adjust 'cases' and 'objectId' based on your model definitions
+//   const user = await User.findById(req.user.id).populate('cases');
 
-      // this is updated
-      user.cases.forEach((caseItem) => {
-        console.log(`Case ${caseItem._id}:`, caseItem);
-      });
-  
-      res.status(200).json({
-        success: true,
-        cases: user.cases,
-      });
-  
-    } catch (error) {
-      console.error(error);
-      next(error);
-    }
-  };
-  
+//       if (!user) {
+//         return res.status(404).json({
+//           success: false,
+//           message: 'User not found',
+//         });
+//       }
+
+//       const caseObjectIds = user.cases.map(caseItem => caseItem.objectId); // Adjust 'objectId' based on your Case model fields
+
+//       res.status(200).json({
+//         success: true,
+//         caseObjectIds,
+//       });
+
+//     } catch (error) {
+//       next(error);
+//     }
+
+//   };
+

@@ -26,7 +26,7 @@ exports.allUsers = async (req, res, next) => {
         return next(error);
     }
 }
-
+// single user
 //show single user
 exports.singleUser = async (req, res, next) => {
     try {
