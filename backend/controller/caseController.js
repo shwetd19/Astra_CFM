@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const Case = require("../models/caseModel.js");
-const User = require("../models/user.js");
+const User = require("../models/user.js"); 
 const MasterCase = mongoose.model("MasterCase", Case.schema);
 const { ObjectId } = require("mongodb");
+
 
 exports.addCase = async (req, res) => {
     try {
@@ -11,11 +12,6 @@ exports.addCase = async (req, res) => {
         // Assuming req.user contains the user information
         const userID = req.user._id;
 
-        console.log(req.body);
-        // console.log(req)
-        // here we have to request the model to get severity and then update this severity store the data accordingly
-
-
         // Create a new collection based on courtID
         const caseModel = mongoose.model(`Case_${courtID}`, Case.schema);
 
@@ -23,22 +19,23 @@ exports.addCase = async (req, res) => {
         const newCase = new caseModel({ courtID, userID, ...restOfData });
 
         // Save the document to the specific courtID table
-        // await newCase.save();
+        await newCase.save();
 
+        // Save the case ID to the user's cases array
+        await User.findByIdAndUpdate(userID, { $addToSet: { cases: newCase._id } });
 
-
-        // Save the document to the mastercases table
-        // const masterCase = new MasterCase({ courtID, userID, ...restOfData });
+        // Update the mastercases table
         const masterCase = new MasterCase({ courtID, userID, ...restOfData });
+        await masterCase.save();
 
-        // await masterCase.save();
-
-        res.status(201).json({ message: "Case added successfully", case: newCase });
+        res.status(201).json({ message: 'Case added successfully', case: newCase });
     } catch (err) {
         console.log(err.message);
         res.status(500).json({ error: err.message });
     }
 };
+
+
 
 exports.getAllCases = async (req, res) => {
   try {

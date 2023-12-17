@@ -3,8 +3,8 @@ const { ObjectId } = mongoose.Schema;
 
 const caseSchema = new mongoose.Schema(
   {
-    objects: [{ type: mongoose.Schema.Types.ObjectId, ref: "ObjectModel" }],
-
+    objects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ObjectModel' }],
+    
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     userID: {
       type: ObjectId,
@@ -20,13 +20,6 @@ const caseSchema = new mongoose.Schema(
         "Magistrate Court",
       ],
       required: true,
-    },
-    caseSeverity: {
-      type: Number,
-    },
-    isScheduled: {
-      type: Boolean,
-      default: false
     },
     courtID: {
       type: String,
