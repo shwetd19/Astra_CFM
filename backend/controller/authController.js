@@ -6,8 +6,9 @@ const ErrorResponse = require('../utils/errorResponse');
 
 
 exports.signup = async (req, res, next) => {
-    // const { email } = req.body;
+    const { email } = req.body;
     const userExist = await User.findOne({ email });
+    console.log({email})
     if (userExist) {
         return next(new ErrorResponse("E-mail already registred", 400));
     }
@@ -17,7 +18,6 @@ exports.signup = async (req, res, next) => {
             success: true,
             user
         })
-        console.log("User Successfully logged in")
     } catch (error) {
         next(error);
     }

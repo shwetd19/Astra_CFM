@@ -139,3 +139,82 @@ const caseSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("Case", caseSchema);
+
+
+// Sample Input for best test-case :
+/*
+{
+    "petitioner": {
+        "name": "John Doe",
+        "gender": "male",
+        "relation": "Father",
+        "dateOfBirth": "1990-01-15",
+        "age": "32",
+        "caseDetails": "Some details about the petitioner's case",
+        "extraName": "John Jr.",
+        "email": "john.doe@example.com",
+        "occupation": "Engineer",
+        "mobileNumber": 1234567890,
+        "pinCode": 123456,
+        "address": "123 Main Street",
+        "state": "California",
+        "district": "Los Angeles",
+        "taluka": "Some Taluka",
+        "village": "Some Village"
+    },
+    "responder": {
+        "name": "Jane Doe",
+        "gender": "female",
+        "relation": "Mother",
+        "dateOfBirth": "1988-05-20",
+        "age": 35,
+        "caseDetails": "Some details about the responder's case",
+        "extraName": "Jane Jr.",
+        "email": "jane.doe@example.com",
+        "occupation": "Doctor",
+        "mobileNumber": 9876543210,
+        "pinCode": 654321,
+        "address": "456 Oak Street",
+        "state": "California",
+        "district": "San Francisco",
+        "taluka": "Some Taluka",
+        "village": "Some Village"
+    },
+    "caseDetails": {
+        "mainDistrict": "Some District",
+        "establishment": "XYZ Corporation",
+        "natureOfCase": "civil",
+        "reliefSought": "Compensation for damages",
+        "caseType": "Lawsuit",
+        "plaintiff": "John Doe",
+        "contactNumber": 9998887777
+    },
+    "facts": {
+        "factDescription": "Some facts about the case",
+        "factTime": "12:30",
+        "factDate": "2023-01-15"
+    },
+    "parties": {
+        "defendantName": "Jane Doe",
+        "plaintiffName": "John Doe"
+    },
+    "district": "Some District",
+    "courtType": "District Court",
+    "courtID": "DC001",
+    "causeOfAction": "Breach of contract",
+    "causeOfActionDate": "2023-01-01",
+    "importantInformation": "Some important details about the case",
+    "prayer": "Seeking fair compensation",
+    "valuation": 50000,
+    "location": {
+        "state": "California",
+        "district": "San Francisco",
+        "taluka": "Some Taluka",
+        "village": "Some Village"
+    },
+    "legalDetails": {
+        "act": "Some Legal Act",
+        "section": "Some Section"
+    }
+}
+*/

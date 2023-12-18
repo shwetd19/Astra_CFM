@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import IconMail from '../../components/Icon/IconMail';
 import IconLockDots from '../../components/Icon/IconLockDots';
 import { useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
 
 const LoginBoxed = () => {
     const [formData, setFormData] = useState({
@@ -20,9 +21,22 @@ const LoginBoxed = () => {
         });
     };
 
-    const handleFormSubmit = (event: { preventDefault: () => void; }) => {
+    
+    const handleFormSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        // Process login logic using formData
+
+        try {
+            // Make a POST request to the backend
+            const response: AxiosResponse<any> = await axios.post('/signin', formData);
+            
+            // Handle the response as needed
+            console.log('Login successful:', response.data);
+
+            // Redirect or perform additional logic after successful login
+        } catch (error: any) {
+            // Handle errors from the backend
+            console.error('Error during login:', error);
+        }
     };
 
     return (

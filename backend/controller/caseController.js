@@ -7,33 +7,77 @@ const { ObjectId } = require("mongodb");
 
 exports.addCase = async (req, res) => {
     try {
-        const { courtID, ...restOfData } = req.body;
-
-        // Assuming req.user contains the user information
+        const { courtID, step, ...restOfData } = req.body;
         const userID = req.user._id;
 
-        // Create a new collection based on courtID
+        let caseDetails = {};
+        let petitionerDetails = {};
+        let responderDetails = {};
+        let otherCaseDetails = {};
+
+        // Extract relevant data based on the step
+        switch (step) {
+            case 1:
+                caseDetails = restOfData;
+                break;
+            case 2:
+                caseDetails = req.user.caseDetails; // Assuming user already has caseDetails from step 1
+                petitionerDetails = restOfData;
+                break;
+            case 3:
+                caseDetails = req.user.caseDetails;
+                petitionerDetails = req.user.petitionerDetails; // Assuming user already has petitionerDetails from step 2
+                responderDetails = restOfData;
+                break;
+            case 4:
+                caseDetails = req.user.caseDetails;
+                petitionerDetails = req.user.petitionerDetails;
+                responderDetails = req.user.responderDetails; // Assuming user already has responderDetails from step 3
+                otherCaseDetails = restOfData;
+                break;
+            default:
+                return res.status(400).json({ error: 'Invalid step' });
+        }
+
         const caseModel = mongoose.model(`Case_${courtID}`, Case.schema);
 
-        // Create a new document using the specific model
-        const newCase = new caseModel({ courtID, userID, ...restOfData });
+        const newCase = new caseModel({
+            courtID,
+            userID,
+            ...caseDetails,
+            petitioner: { ...petitionerDetails },
+            responder: { ...responderDetails },
+            ...otherCaseDetails,
+        });
 
-        // Save the document to the specific courtID table
         await newCase.save();
 
-        // Save the case ID to the user's cases array
-        await User.findByIdAndUpdate(userID, { $addToSet: { cases: newCase._id } });
+        // Update user's details based on the step
+        const updateFields = {};
+        switch (step) {
+            case 1:
+                updateFields.caseDetails = newCase._id;
+                break;
+            case 2:
+                updateFields.petitionerDetails = newCase._id;
+                break;
+            case 3:
+                updateFields.responderDetails = newCase._id;
+                break;
+            case 4:
+                updateFields.otherCaseDetails = newCase._id;
+                break;
+        }
 
-        // Update the mastercases table
-        const masterCase = new MasterCase({ courtID, userID, ...restOfData });
-        await masterCase.save();
+        await User.findByIdAndUpdate(userID, { $set: updateFields });
 
-        res.status(201).json({ message: 'Case added successfully', case: newCase });
+        res.status(201).json({ message: 'Case details added successfully', case: newCase });
     } catch (err) {
         console.log(err.message);
         res.status(500).json({ error: err.message });
     }
 };
+
 
 
 
