@@ -35,11 +35,11 @@ const Index = () => {
     const revenueChart: any = {
         series: [
             {
-                name: 'Income',
+                name: 'Criminal',
                 data: [16800, 16800, 15500, 17800, 15500, 17000, 19000, 16000, 15000, 17000, 14000, 17000],
             },
             {
-                name: 'Expenses',
+                name: 'Civil',
                 data: [16500, 17500, 16200, 17300, 16000, 19500, 16000, 17000, 16000, 19000, 18000, 19000],
             },
         ],
@@ -183,7 +183,7 @@ const Index = () => {
 
     //Sales By Category
     const salesByCategory: any = {
-        series: [985, 737, 270],
+        series: [38000, 37826,],
         options: {
             chart: {
                 type: 'donut',
@@ -247,7 +247,7 @@ const Index = () => {
                     },
                 },
             },
-            labels: ['Apparel', 'Sports', 'Others'],
+            labels: ['Criminal', 'Civil', 'Total'],
             states: {
                 hover: {
                     filter: {
@@ -269,12 +269,12 @@ const Index = () => {
     const dailySales: any = {
         series: [
             {
-                name: 'Sales',
-                data: [44, 55, 41, 67, 22, 43, 21],
+                name: 'Cases',
+                data: [445, 552, 417, 676, 224, 439, 217],
             },
             {
                 name: 'Last Week',
-                data: [13, 23, 20, 8, 13, 27, 33],
+                data: [134, 233, 207, 866, 131, 277, 339],
             },
         ],
         options: {
@@ -415,7 +415,7 @@ const Index = () => {
                 <div className="grid xl:grid-cols-3 gap-6 mb-6">
                     <div className="panel h-full xl:col-span-2">
                         <div className="flex items-center justify-between dark:text-white-light mb-5">
-                            <h5 className="font-semibold text-lg">Reqwdfewqvenue</h5>
+                            <h5 className="font-semibold text-lg">Nyaya Sarthi Dashboard</h5>
                             <div className="dropdown">
                                 <Dropdown
                                     offset={[0, 1]}
@@ -437,7 +437,7 @@ const Index = () => {
                             </div>
                         </div>
                         <p className="text-lg dark:text-white-light/90">
-                            Total Profit <span className="text-primary ml-2">$10,840</span>
+                            Total Cases <span className="text-primary ml-2">75,826</span>
                         </p>
                         <div className="relative">
                             <div className="bg-white dark:bg-black rounded-lg overflow-hidden">
@@ -454,7 +454,7 @@ const Index = () => {
 
                     <div className="panel h-full">
                         <div className="flex items-center mb-5">
-                            <h5 className="font-semibold text-lg dark:text-white-light">Sales By Category</h5>
+                            <h5 className="font-semibold text-lg dark:text-white-light">Cases By Category</h5>
                         </div>
                         <div>
                             <div className="bg-white dark:bg-black rounded-lg overflow-hidden">
@@ -474,7 +474,7 @@ const Index = () => {
                     <div className="panel h-full sm:col-span-2 xl:col-span-1">
                         <div className="flex items-center mb-5">
                             <h5 className="font-semibold text-lg dark:text-white-light">
-                                Daily Sales
+                                Daily Cases
                                 <span className="block text-white-dark text-sm font-normal">Go to columns for details.</span>
                             </h5>
                             <div className="ltr:ml-auto rtl:mr-auto relative">
@@ -526,8 +526,8 @@ const Index = () => {
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex font-semibold text-white-dark mb-2">
-                                        <h6>Income</h6>
-                                        <p className="ltr:ml-auto rtl:mr-auto">$92,600</p>
+                                        <h6>Criminal</h6>
+                                        <p className="ltr:ml-auto rtl:mr-auto">38,000</p>
                                     </div>
                                     <div className="rounded-full h-2 bg-dark-light dark:bg-[#1b2e4b] shadow">
                                         <div className="bg-gradient-to-r from-[#7579ff] to-[#b224ef] w-11/12 h-full rounded-full"></div>
@@ -542,8 +542,8 @@ const Index = () => {
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex font-semibold text-white-dark mb-2">
-                                        <h6>Profit</h6>
-                                        <p className="ltr:ml-auto rtl:mr-auto">$37,515</p>
+                                        <h6>Civil</h6>
+                                        <p className="ltr:ml-auto rtl:mr-auto">37,826</p>
                                     </div>
                                     <div className="w-full rounded-full h-2 bg-dark-light dark:bg-[#1b2e4b] shadow">
                                         <div className="bg-gradient-to-r from-[#3cba92] to-[#0ba360] w-full h-full rounded-full" style={{ width: '65%' }}></div>
@@ -558,8 +558,8 @@ const Index = () => {
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex font-semibold text-white-dark mb-2">
-                                        <h6>Expenses</h6>
-                                        <p className="ltr:ml-auto rtl:mr-auto">$55,085</p>
+                                        <h6>Total</h6>
+                                        <p className="ltr:ml-auto rtl:mr-auto">75,826</p>
                                     </div>
                                     <div className="w-full rounded-full h-2 bg-dark-light dark:bg-[#1b2e4b] shadow">
                                         <div className="bg-gradient-to-r from-[#f09819] to-[#ff5858] w-full h-full rounded-full" style={{ width: '80%' }}></div>
@@ -578,7 +578,7 @@ const Index = () => {
                             </div>
                             <h5 className="font-semibold text-2xl ltr:text-right rtl:text-left dark:text-white-light">
                                 3,192
-                                <span className="block text-sm font-normal">Total Orders</span>
+                                <span className="block text-sm font-normal">Total Cases Scheduled</span>
                             </h5>
                         </div>
                         <div className="bg-transparent rounded-lg overflow-hidden">

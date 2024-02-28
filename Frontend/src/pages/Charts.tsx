@@ -80,7 +80,7 @@ const Charts = () => {
     const areaChart: any = {
         series: [
             {
-                name: 'Income',
+                name: 'Criminal',
                 data: [16800, 16800, 15500, 17800, 15500, 17000, 19000, 16000, 15000, 17000, 14000, 17000],
             },
         ],
@@ -822,7 +822,7 @@ const lineChart: any = {
 const areaChart: any = {
     series: [
         {
-            name: 'Income',
+            name: 'Criminal',
             data: [16800, 16800, 15500, 17800, 15500, 17000, 19000, 16000, 15000, 17000, 14000, 17000],
         },
     ],

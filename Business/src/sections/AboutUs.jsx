@@ -55,25 +55,25 @@ export const AboutUs = () => {
   ];
 
   const teamMembers = [
-    {
-      name: 'Neeraj Kumar',
-      role: 'MERN Stack Developer, Data Scientist',
-      linkedin: 'https://www.linkedin.com/in/neeraj-kumar-091415237/',
-      github: '',
-      twitter: '',
-      bio: 'Neeraj Kumar, skilled in data science techniques for analyzing and deriving insights from data set. He is also proficient in MERN stack development',
-      image:
-        'https://media.licdn.com/dms/image/C4D03AQHDouCZOYFGNg/profile-displayphoto-shrink_800_800/0/1659377685995?e=1708560000&v=beta&t=uHYtLpp2pfmVJ-m5p1WBiiJNBMFb6CXL7-25HZGYLS8'
-    },
-    {
-      name: 'Mitesh Tank',
-      role: 'Full Stack Developer, DevOps',
-      linkedin: 'https://www.linkedin.com/in/mitesh-tank/',
-      github: 'https://github.com/codewithmitesh',
-      twitter: '',
-      bio: 'Mitesh Tank, a full stack web developer, experienced in creating web applications ensuring seamless deployment and integration.',
-      image: 'https://avatars.githubusercontent.com/u/85953650?v=4'
-    },
+    // {
+    //   name: 'Neeraj Kumar',
+    //   role: 'MERN Stack Developer, Data Scientist',
+    //   linkedin: 'https://www.linkedin.com/in/neeraj-kumar-091415237/',
+    //   github: '',
+    //   twitter: '',
+    //   bio: 'Neeraj Kumar, skilled in data science techniques for analyzing and deriving insights from data set. He is also proficient in MERN stack development',
+    //   image:
+    //     'https://media.licdn.com/dms/image/C4D03AQHDouCZOYFGNg/profile-displayphoto-shrink_800_800/0/1659377685995?e=1708560000&v=beta&t=uHYtLpp2pfmVJ-m5p1WBiiJNBMFb6CXL7-25HZGYLS8'
+    // },
+    // {
+    //   name: 'Mitesh Tank',
+    //   role: 'Full Stack Developer, DevOps',
+    //   linkedin: 'https://www.linkedin.com/in/mitesh-tank/',
+    //   github: 'https://github.com/codewithmitesh',
+    //   twitter: '',
+    //   bio: 'Mitesh Tank, a full stack web developer, experienced in creating web applications ensuring seamless deployment and integration.',
+    //   image: 'https://avatars.githubusercontent.com/u/85953650?v=4'
+    // },
     {
       name: 'Prasad Lokhande',
       role: 'MERN Stack, AI/ML',
@@ -85,16 +85,6 @@ export const AboutUs = () => {
         'https://media.licdn.com/dms/image/D4D03AQHDz74j17EEbg/profile-displayphoto-shrink_800_800/0/1679330842246?e=1708560000&v=beta&t=0po5foh9m1_BlqaAQvYtz2mk8sWKW4pNA5zoCbw1Ba4'
     },
     {
-      name: 'Abhishek Pawar',
-      role: 'Web Developer, Cloud Computing',
-      linkedin: 'https://www.linkedin.com/in/abhishek-pawar-63629022a/',
-      github: '',
-      twitter: '',
-      bio: 'Abhishek Pawar, excellent in creating websites, and skilled in utilising cloud Technology for modern, scalable online solutions.',
-      image:
-        'https://media.licdn.com/dms/image/C4D03AQE7vlN6-aNRgw/profile-displayphoto-shrink_800_800/0/1658039867904?e=1708560000&v=beta&t=nF_5x7IA1XQP9IZLvooNDkD3lJuDLNMrhIPYNRAEDDI'
-    },
-    {
       name: 'Shwetas Dhake',
       role: 'Fullstack Developer',
       linkedin: 'https://www.linkedin.com/in/shwetas-dhake/',
@@ -104,15 +94,25 @@ export const AboutUs = () => {
       image: 'https://res.cloudinary.com/dt3lzix8e/image/upload/v1702892873/dhake_yh3rny.jpg'
     },
     {
-      name: 'Tanvi Pednekar',
-      role: 'Frontend Developer',
-      linkedin: 'https://www.linkedin.com/in/pednekartanvi/',
+      name: 'Abhishek Pawar',
+      role: 'Web Developer, Cloud Computing',
+      linkedin: 'https://www.linkedin.com/in/abhishek-pawar-63629022a/',
       github: '',
       twitter: '',
-      bio: 'Tanvi Pednekar, is knowledgeable in frontend development and crafting engaging user experiences for web applications',
+      bio: 'Abhishek Pawar, excellent in creating websites, and skilled in utilising cloud Technology for modern, scalable online solutions.',
       image:
-        'https://media.licdn.com/dms/image/D4E03AQGc0omFNMhP8g/profile-displayphoto-shrink_800_800/0/1688987769783?e=1708560000&v=beta&t=w47zuAMPGtAakuZWL_zBJXUjQyzUr_f4DOnqdHynbrI'
-    }
+        'https://media.licdn.com/dms/image/C4D03AQE7vlN6-aNRgw/profile-displayphoto-shrink_800_800/0/1658039867904?e=1708560000&v=beta&t=nF_5x7IA1XQP9IZLvooNDkD3lJuDLNMrhIPYNRAEDDI'
+    },
+    // {
+    //   name: 'Tanvi Pednekar',
+    //   role: 'Frontend Developer',
+    //   linkedin: 'https://www.linkedin.com/in/pednekartanvi/',
+    //   github: '',
+    //   twitter: '',
+    //   bio: 'Tanvi Pednekar, is knowledgeable in frontend development and crafting engaging user experiences for web applications',
+    //   image:
+    //     'https://media.licdn.com/dms/image/D4E03AQGc0omFNMhP8g/profile-displayphoto-shrink_800_800/0/1688987769783?e=1708560000&v=beta&t=w47zuAMPGtAakuZWL_zBJXUjQyzUr_f4DOnqdHynbrI'
+    // }
   ];
 
   return (
